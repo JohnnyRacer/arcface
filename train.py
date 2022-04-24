@@ -28,8 +28,8 @@ parser.add_argument("--identities",default=9131,type=int,help="Number of identit
 parser.add_argument("--samples",default=3310000,type=int,help="Total number of image samples within the dataset.")
 parser.add_argument("--validation",default="",type=str,help="Location of the validation dataset.")
 parser.add_argument("--test",default="",type=str,help="Location of the test dataset.")
-parser.add_argument('--sviter',defaults=1000,type=int, help="Save models and logs at every nth iteration. Defaults to 1000.")
-parser.add_argument('--l2fac', type=float, defaults=5e-4, help="The l2 factor.")
+parser.add_argument('--sviter',default=1000,type=int, help="Save models and logs at every nth iteration. Defaults to 1000.")
+parser.add_argument('--l2fac', type=float, default=5e-4, help="The l2 factor.")
 parser.add_argument("dataset",type=str,help="Dataset directory.")
 
 

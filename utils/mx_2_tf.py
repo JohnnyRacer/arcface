@@ -8,10 +8,15 @@ Run this module like this:
 import mxnet as mx
 import tensorflow as tf
 from tqdm import tqdm
+from argparse import ArgumentParser
 
 from .tfrecord_operator.tfrecord_operator import RecordOperator, int64_feature, bytes_feature
 
-
+parser = ArgumentParser()
+parser.add_argument("--idx",type=str,help="Location of the .idx file for the MXNet dataset.")
+parser.add_argument('--rec',type=str,help="Location of the .rec file for the MXNet dataset.")
+parser.add_argument("--svdir",type=str,help="Directory to save the generated TFRecord database to.")
+args = parser.parse_args()
 class MS1M(RecordOperator):
     """Construct MS1M tfrecord files."""
 
@@ -104,11 +109,11 @@ def save_one_sample_to_file(parsed_dataset, file_to_write='sample.jpg'):
 
 if __name__ == "__main__":
     # MXNET record:
-    mx_idx = '/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train.idx'
-    mx_record = '/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train.rec'
+    mx_idx = args.idx #'/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train.idx'
+    mx_record = args.rec #'/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train.rec'
 
     # The TFRecord file you want to generate.
-    tf_record = "/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train.record"
+    tf_record = args.svdir #"/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train.record"
 
     # Generate TFRecord file.
     convert(mx_record, mx_idx, tf_record)

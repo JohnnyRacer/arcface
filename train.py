@@ -24,8 +24,8 @@ parser.add_argument("--restore_weights_only", default=False, type=bool,
 parser.add_argument("--override", default=False, type=bool,
                     help="Manually override the training objects.")
 parser.add_argument("--name",default="test_run",type=str,help="Name of the run.")
-parser.add_argument("--identities",default=9131,type=int,help="Number of identities within the dataset.")
-parser.add_argument("--samples",default=3310000,type=int,help="Total number of image samples within the dataset.")
+parser.add_argument("--identities",default=85742,type=int,help="Number of identities within the dataset.")
+parser.add_argument("--samples",default=5822653,type=int,help="Total number of image samples within the dataset.")
 parser.add_argument("--validation",default="",type=str,help="Location of the validation dataset.")
 parser.add_argument("--test",default="",type=str,help="Location of the test dataset.")
 parser.add_argument('--sviter',default=1000,type=int, help="Save models and logs at every nth iteration. Defaults to 1000.")

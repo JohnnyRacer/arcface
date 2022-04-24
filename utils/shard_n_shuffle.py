@@ -6,11 +6,11 @@ dataset compared with the original one.
 """
 import os
 import time
-
+import sys
 import numpy as np
 import tensorflow as tf
 from tqdm import tqdm
-
+from argparse import ArgumentParser
 
 def shuffle_once(input_file, output_file, total_samples=None):
     """Make a new record file with shuffled samples from the input record file.
@@ -151,15 +151,20 @@ def shard(record_file, num_shards, shuffle_buffer_size=None):
 
     print("All done. Output files:", output_files)
 
-
+parser = ArgumentParser()
+parser.add_argument('-r','--rec',type=str,help="Location of the TFRecord .record file for the MXNet dataset.")
+parser.add_argument('-i',"--iters",type=int,default=3,help="Iterations of shuffling to run")
+parser.add_argument('-n','--nsamples',type=int,default=5822653,help='Number of images in the dataset.')
+args = parser.parse_args()
 if __name__ == "__main__":
+    
     # Where is the TFRecord file to be shuffled?
-    record_file = "/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train_0.record"
+    record_file = args.recfp 
 
     # How many times the file should be shuffled?
-    rounds = 3
+    rounds = parser.iters
 
     # Shuffling..
-    shuffle(record_file, rounds, 5822653)
+    shuffle(record_file, rounds, args.nsamples)
 
     print("All done.")

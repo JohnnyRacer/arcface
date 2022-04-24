@@ -23,6 +23,16 @@ parser.add_argument("--restore_weights_only", default=False, type=bool,
                     help="Only restore the model weights from checkpoint.")
 parser.add_argument("--override", default=False, type=bool,
                     help="Manually override the training objects.")
+parser.add_argument("--name",default="test_run",type=str,help="Name of the run.")
+parser.add_argument("--identities",default=85742,type=int,help="Number of identities within the dataset.")
+parser.add_argument("--samples",default=5822653,type=int,help="Total number of image samples within the dataset.")
+parser.add_argument("--validation",default="",type=str,help="Location of the validation dataset.")
+parser.add_argument("--test",default="",type=str,help="Location of the test dataset.")
+parser.add_argument('--sviter',defaults=1000,type=int, help="Save models and logs at every nth iteration. Defaults to 1000.")
+parser.add_argument('--l2fac', type=float, defaults=5e-4, help="The l2 factor.")
+parser.add_argument("dataset",type=str,help="Dataset directory.")
+
+
 args = parser.parse_args()
 
 if __name__ == "__main__":
@@ -31,28 +41,28 @@ if __name__ == "__main__":
     # logs, etc. Modify these paths to suit your needs.
 
     # What is the model's name?
-    name = "hrnetv2"
+    name = args.name
 
     # Where are the training files?
-    train_files = "/home/robin/data/face/faces_ms1m-refine-v2_112x112/faces_emore/train.record"
+    train_files = args.dataset
 
     # Where are the testing files?
-    test_files = None
+    test_files = args.test or None
 
     # Where are the validation files? Set `None` if no files available.
-    val_files = None
+    val_files = args.validation or None
 
     # What is the shape of the input image?
-    input_shape = (112, 112, 3)
+    input_shape = (112, 112, 3) #Don't mess with this unless you know what you're doing.
 
     # What is the size of the embeddings that represent the faces?
     embedding_size = 512
 
     # How many identities do you have in the training dataset?
-    num_ids = 85742
+    num_ids = args.identities
 
     # How many examples do you have in the training dataset?
-    num_examples = 5822653
+    num_examples = args.samples
 
     # That should be sufficient for training. However if you want more
     # customization, please keep going.
@@ -64,10 +74,10 @@ if __name__ == "__main__":
     export_dir = os.path.join(training_dir, 'exported', name)
 
     # Any weight regularization?
-    regularizer = keras.regularizers.L2(5e-4)
+    regularizer = keras.regularizers.L2(args.l2fac)
 
     # How often do you want to log and save the model, in steps?
-    frequency = 1000
+    frequency = args.sviter
 
     # All sets. Now it's time to build the model. There are two steps in ArcFace
     # training: 1, training with softmax loss; 2, training with arcloss. This

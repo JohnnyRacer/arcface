@@ -1,4 +1,21 @@
-# arcface
+# Arcface implementation in Keras
+## Features in this fork:
+- Added CLI arguments for training arguments for flexibility.
+- Jupyter notebook for training and validation on Colab or Kaggle.
+- Expose detection and recognition endpoints for API.
+- Augmented training dataset for improved edge case results.
+
+---
+
+## Future features to be considered:
+
+- Distributed training.
+- Fine tuning based on pretrained models.
+- Training/inference on TPU. 
+---
+
+ Forked over from [ArcFace by yinguobing](https://github.com/yinguobing/arcface)
+
 A TensorFlow implementation of [ArcFace](https://arxiv.org/abs/1801.07698) for face recognition.
 
 ![demo](docs/demo.gif)

@@ -10,7 +10,7 @@ import tensorflow as tf
 from tqdm import tqdm
 from argparse import ArgumentParser
 
-from tfrecord_operator import RecordOperator, int64_feature, bytes_feature
+from utils.tfrecord_operator import RecordOperator, int64_feature, bytes_feature
 
 parser = ArgumentParser()
 parser.add_argument("--idx",type=str,help="Location of the .idx file for the MXNet dataset.")
